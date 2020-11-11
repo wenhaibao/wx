@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/test1',"TestController@test1");  //测试
 
 Route::get('/wx',"WxController@wx"); //微信接入
+Route::get('/wx/token',"WxController@getAccessToken"); //获取accesstoken
