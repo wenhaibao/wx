@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 Route::get('/test1',"TestController@test1");  //测试
 
-Route::get('/wx',"WxController@wxEvent"); //接收事件推送
+Route::post('/wx',"WxController@wxEvent"); //接收事件推送
 Route::get('/wx/token',"WxController@getAccessToken"); //获取accesstoken
