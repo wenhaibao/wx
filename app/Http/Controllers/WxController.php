@@ -33,25 +33,33 @@ class WxController extends Controller
      */
     public function wxEvent()
     {
-    $signature = $_GET["signature"];
-    $timestamp = $_GET["timestamp"];
-    $nonce = $_GET["nonce"];
-	
-    $token = env('WX_TOKEN');
-    $tmpArr = array($token, $timestamp, $nonce);
-    sort($tmpArr, SORT_STRING);
-    $tmpStr = implode( $tmpArr );
-    $tmpStr = sha1( $tmpStr );
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];
+        
+        $token = env('WX_TOKEN');
+        $tmpArr = array($token, $timestamp, $nonce);
+        sort($tmpArr, SORT_STRING);
+        $tmpStr = implode( $tmpArr );
+        $tmpStr = sha1( $tmpStr );
     
-    if( $tmpStr == $signature )  //验证通过
+        if( $tmpStr == $signature )  //验证通过
         {
             // 1接收数据
             $xml_str = file_get_contents("php://input");
             // 记录日志
-            file_put_contents('wx_event.log',$xml_str);
+            file_put_contents('wx_event.log',$xml_str,FILE_APPEND);
             // 2把xml文本转换为php的对象或者数组
-            // $obj = simplexml_load_string($xml_str,'SimpleXMLElement',LIBXML_NOCDATA);
-            // dd($obj);
+            $obj = simplexml_load_string($xml_str);
+            if($obj->MsgType=="event")
+            {
+                if($obj->Event=="subscribe")
+                {
+                    $content = "欢迎关注";
+                    echo $this->sub($obj,$content);
+                    exit;
+                }
+            }
             echo "";
             die;
         }else{
@@ -85,5 +93,21 @@ class WxController extends Controller
         }
         
         echo 'access_token'.$token;
+    }
+    /**
+     * 关注回复消息
+     */
+    public function sub($obj,$content)
+    {
+        $FromUserName = $obj->ToUserName;
+        $ToUserName = $obj->FromUserName;
+        $xml = "<xml><ToUserName><![CDATA[".$ToUserName."]]></ToUserName>
+                    <FromUserName><![CDATA[".$FromUserName."]]></FromUserName>
+                    <CreateTime>1605066750</CreateTime>
+                    <MsgType><![CDATA[event]]></MsgType>
+                    <Event><![CDATA[subscribe]]></Event>
+                    <EventKey><![CDATA[".$content."]]></EventKey>
+                </xml>";
+                return $xml;
     }
 }
