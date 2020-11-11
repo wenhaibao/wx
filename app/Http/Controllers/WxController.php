@@ -28,7 +28,9 @@ class WxController extends Controller
             echo '';
         }
     }
-
+    /**
+     * 处理推送文件
+     */
     public function wxEvent()
     {
     $signature = $_GET["signature"];
@@ -43,7 +45,15 @@ class WxController extends Controller
     
     if( $tmpStr == $signature )  //验证通过
         {
+            // 1接收数据
+            $xml_str = file_get_contents("php://input");
+            // 记录日志
+            file_put_contents('wx_event.log',$xml_str);
+            // 2把xml文本转换为php的对象或者数组
+            // $obj = simplexml_load_string($xml_str,'SimpleXMLElement',LIBXML_NOCDATA);
+            // dd($obj);
             echo "";
+            die;
         }else{
             echo '';
         }
