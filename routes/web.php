@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test1',"TestController@test1");  //测试
+
+Route::get('/wx',"WxController@wx"); //微信接入
