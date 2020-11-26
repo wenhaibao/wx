@@ -108,6 +108,7 @@ class WxController extends Controller
                     <Event><![CDATA[subscribe]]></Event>
                     <EventKey><![CDATA[".$content."]]></EventKey>
                 </xml>";
+                $xml = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
                 return $xml;
     }
 }
