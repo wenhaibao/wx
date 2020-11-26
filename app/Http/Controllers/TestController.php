@@ -44,4 +44,16 @@ class TestController extends Controller
         $json_str = $response->getBody();  //服务器相应数据
         echo $json_str;
     }
+    public function aaa()
+    {
+        $xml = '<xml><ToUserName><![CDATA[gh_d73211005fc1]]></ToUserName>
+        <FromUserName><![CDATA[ov8Pk550CtW7sxoSuwrWonqh6ffk]]></FromUserName>
+        <CreateTime>1605425193</CreateTime>
+        <MsgType><![CDATA[event]]></MsgType>
+        <Event><![CDATA[unsubscribe]]></Event>
+        <EventKey><![CDATA[]]></EventKey>
+        </xml>';
+        $obj = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        dd($obj);
+    }
 }

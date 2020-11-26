@@ -9,25 +9,25 @@ class WxController extends Controller
     /**
      * 微信接入
      */
-    public function wx()
-    {
-    $signature = $_GET["signature"];
-    $timestamp = $_GET["timestamp"];
-    $nonce = $_GET["nonce"];
+    // public function wx()
+    // {
+    // $signature = $_GET["signature"];
+    // $timestamp = $_GET["timestamp"];
+    // $nonce = $_GET["nonce"];
 	
-    $token = env('WX_TOKEN');
-    $tmpArr = array($token, $timestamp, $nonce);
-    sort($tmpArr, SORT_STRING);
-    $tmpStr = implode( $tmpArr );
-    $tmpStr = sha1( $tmpStr );
+    // $token = env('WX_TOKEN');
+    // $tmpArr = array($token, $timestamp, $nonce);
+    // sort($tmpArr, SORT_STRING);
+    // $tmpStr = implode( $tmpArr );
+    // $tmpStr = sha1( $tmpStr );
     
-    if( $tmpStr == $signature )
-        {
-            echo $_GET['echostr'];
-        }else{
-            echo '';
-        }
-    }
+    // if( $tmpStr == $signature )
+    //     {
+    //         echo $_GET['echostr'];
+    //     }else{
+    //         echo '';
+    //     }
+    // }
     /**
      * 处理推送文件
      */
@@ -43,7 +43,7 @@ class WxController extends Controller
         $tmpStr = implode( $tmpArr );
         $tmpStr = sha1( $tmpStr );
     
-        if( $tmpStr == $signature )  //验证通过
+        if($tmpStr == $signature)  //验证通过
         {
             // 1接收数据
             $xml_str = file_get_contents("php://input");
