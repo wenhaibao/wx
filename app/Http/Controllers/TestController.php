@@ -48,9 +48,9 @@ class TestController extends Controller
     {
         $xml = '<xml><ToUserName><![CDATA[gh_d73211005fc1]]></ToUserName>
         <FromUserName><![CDATA[ov8Pk550CtW7sxoSuwrWonqh6ffk]]></FromUserName>
-        <CreateTime>1605425193</CreateTime>
+        <CreateTime>1606456596</CreateTime>
         <MsgType><![CDATA[event]]></MsgType>
-        <Event><![CDATA[unsubscribe]]></Event>
+        <Event><![CDATA[subscribe]]></Event>
         <EventKey><![CDATA[]]></EventKey>
         </xml>';
         $obj = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);

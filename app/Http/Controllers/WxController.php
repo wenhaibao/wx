@@ -48,7 +48,7 @@ class WxController extends Controller
             // 1接收数据
             $xml_str = file_get_contents("php://input");
             // 记录日志
-            file_put_contents('wx_event.log',$xml_str,FILE_APPEND);
+            file_put_contents('wx_event.log',$xml_str,LIBXML_NOCDATA);
             // 2把xml文本转换为php的对象或者数组
             $obj = simplexml_load_string($xml_str);
             if($obj->MsgType=="event")
@@ -101,14 +101,13 @@ class WxController extends Controller
     {
         $FromUserName = $obj->ToUserName;
         $ToUserName = $obj->FromUserName;
-        $xml = "<xml><ToUserName><![CDATA[".$ToUserName."]]></ToUserName>
-                    <FromUserName><![CDATA[".$FromUserName."]]></FromUserName>
-                    <CreateTime>1605066750</CreateTime>
-                    <MsgType><![CDATA[event]]></MsgType>
-                    <Event><![CDATA[subscribe]]></Event>
-                    <EventKey><![CDATA[".$content."]]></EventKey>
-                </xml>";
-                $xml = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
-                return $xml;
+        $xml = '<xml><ToUserName><![CDATA['.$ToUserName.']]></ToUserName>
+        <FromUserName><![CDATA['.$FromUserName.']]></FromUserName>
+        <CreateTime>1606445384</CreateTime>
+        <MsgType><![CDATA[event]]></MsgType>
+        <Event><![CDATA[subscribe]]></Event>
+        <EventKey><![CDATA['.$content.']]></EventKey>
+        </xml>';
+        return $xml;
     }
 }
