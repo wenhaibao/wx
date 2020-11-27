@@ -104,9 +104,10 @@ class WxController extends Controller
         $xml = '<xml>
         <ToUserName><![CDATA['.$ToUserName.']]></ToUserName>
         <FromUserName><![CDATA['.$FromUserName.']]></FromUserName>
-        <CreateTime>123456789</CreateTime>
-        <MsgType><![CDATA[event]]></MsgType>
-        <Event><![CDATA['.$content.']]></Event>
+        <CreateTime>1348831860</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA['.$content.']]></Content>
+        <MsgId>1234567890123456</MsgId>
       </xml>';
         return $xml;
     }
