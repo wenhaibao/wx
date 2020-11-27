@@ -101,13 +101,13 @@ class WxController extends Controller
     {
         $FromUserName = $obj->ToUserName;
         $ToUserName = $obj->FromUserName;
-        $xml = '<xml><ToUserName><![CDATA['.$ToUserName.']]></ToUserName>
+        $xml = '<xml>
+        <ToUserName><![CDATA['.$ToUserName.']]></ToUserName>
         <FromUserName><![CDATA['.$FromUserName.']]></FromUserName>
-        <CreateTime>1606445384</CreateTime>
+        <CreateTime>123456789</CreateTime>
         <MsgType><![CDATA[event]]></MsgType>
-        <Event><![CDATA[subscribe]]></Event>
-        <EventKey><![CDATA['.$content.']]></EventKey>
-        </xml>';
+        <Event><![CDATA['.$content.']]></Event>
+      </xml>';
         return $xml;
     }
 }
